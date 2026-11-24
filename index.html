@@ -236,6 +236,36 @@
   </div>
 </article>
 
+    <!-- Project 6 -->
+    <article class="glass project reveal" data-id="p6">
+  <div class="shot"><img src="Projects/Hospital Analytics Assistant Dashboard.png" alt="MediCore hospital dashboard showing a diagnoses bar chart with an AI-written insight" width="640" height="360" loading="lazy" data-fallback="NL2SQL Hospital Dashboard screenshot"></div>
+  <span class="cat">LLM Engineering</span>
+  <h3>Multi-Agent NL2SQL Platform for a Hospital Database</h3>
+  <p>A platform where hospital staff ask questions in plain English and get validated SQL results, charts and written insights back, handled by four specialist AI agents with no SQL knowledge needed.</p>
+  <div class="tags"><span>Python</span><span>Claude API</span><span>PostgreSQL</span><span>LangFuse</span><span>Streamlit</span></div>
+  <div class="acts">
+    <a class="btn sm" href="https://github.com/Bimee-Stack/nl2sql-project" target="_blank" rel="noopener noreferrer">GitHub</a>
+    <!-- Add this only when the online panels work:
+    <a class="btn sm" href="https://YOUR-APP-NAME.streamlit.app" target="_blank" rel="noopener noreferrer">Live demo</a> -->
+    <button class="btn sm primary" data-open>View details</button>
+  </div>
+  <div class="detail" hidden>
+    <h4>Context</h4>
+    <p>Hospital operations teams need answers from a 12-table CRM database (patients, appointments, admissions, billing and more), but getting them normally requires SQL expertise and manual help. The goal was a safe system that turns plain-English questions into trustworthy answers.</p>
+    <h4>Technical implementation</h4>
+    <ul>
+      <li>Four agents pass structured messages: an Intent Router (data question, greeting, unsafe request or unclear), a SQL Generator, a Result Interpreter and a Fallback Agent for persistent failures.</li>
+      <li>The SQL prompt is built automatically from the live database (tables, column types, foreign keys and sample rows), so no schema is hardcoded.</li>
+      <li>A validation layer allows only single SELECT statements, blocks destructive keywords and risky functions, and checks tables, columns and syntax with PostgreSQL EXPLAIN. Queries run in read-only transactions.</li>
+      <li>Failed queries retry up to 3 times, with each error fed back to the model. Users see friendly messages instead of raw errors, and every failure path (AI outage, database outage, agent crash) is caught.</li>
+      <li>Every agent and model call is traced with LangFuse (input, output, latency and token usage) and saved as local JSON trace files.</li>
+      <li>A Streamlit dashboard shows five live panels with a date filter and Plotly charts with titles and axis labels. Each chart has a plain-English insight that cites real numbers, plus a free-question box. The data lives in a hosted PostgreSQL database (Neon).</li>
+    </ul>
+    <h4>Key finding</h4>
+    <p>Model-written SQL cannot be trusted by default, so validation and read-only execution matter more than prompt wording. Tracing and error handling also paid off in practice: they helped pinpoint a bug caused by a change in the model reply format.</p>
+  </div>
+</article>
+
   </div>
 </div></section>
 
